@@ -9,28 +9,23 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "building and testing the app ..."
+      - run: echo "building and testing the app for Pr..."
   docker-build-push:
     runs-on: ubuntu-latest
     needs: build-test
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v2
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
+      - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
@@ -45,7 +40,7 @@ jobs:
           git config --global user.email ci-bot@argocd.com && git config --global user.name ci-bot
           echo "cloning app repo"
           git clone https://oauth2:${{ secrets.GH_PAT }}@github.com/${{ github.repository_owner }}/argocd-webapp.git
-          cd argocd-course-webapp
+          cd argocd-webapp
           echo "checkout source branch"
           git checkout ${{ github.event.pull_request.head.ref }}
           echo "updating image tag in values file"
