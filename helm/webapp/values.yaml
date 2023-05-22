@@ -1,4 +1,4 @@
-# Default values for demo.
+# Default values for demo webapp.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -8,7 +8,7 @@ image:
   repository: pubudusenadeera/argocd-course-webapp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 6ddcd824ef03b1849a7ae3932d7c4d77db84c7d1
+  tag: 8b2e55182d7fd8690f1304e840de4e5333604e11
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,7 +39,6 @@ securityContext: {}
 service:
   type: NodePort
   port: 80
-  nodeport: 32080
 
 ingress:
   enabled: false
